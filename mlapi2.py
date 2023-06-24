@@ -19,7 +19,7 @@ class ScoringItem(BaseModel):
 with open('best_model_team_rf.pkl', 'rb') as file:
     model = pickle.load(file)
 
-@app.get("/")
+@app.post("/")
 async def scoring_endpoint(item: ScoringItem):
     df = pd.DataFrame([item.dict().values()], columns=item.dict().keys())
     yhat = model.predict(df)
