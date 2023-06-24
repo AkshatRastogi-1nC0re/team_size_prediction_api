@@ -8,7 +8,6 @@ import math
 app = FastAPI()
 
 class ScoringItem(BaseModel):
-    Class: int
     TES: int
     TIS: int
     CLE: int
@@ -16,6 +15,7 @@ class ScoringItem(BaseModel):
     PCS: int
     HC: int
     RAS: int
+    Class: int
 
 with open('best_model_team_rf.pkl', 'rb') as file:
     model = pickle.load(file)
