@@ -22,6 +22,8 @@ with open('best_model_team_rf.pkl', 'rb') as file:
 
 @app.post("/")
 async def scoring_endpoint(item: ScoringItem):
+    print(list(item.dict().values()))
     df = pd.DataFrame([item.dict().values()], columns=item.dict().keys())
+    print(df)
     yhat = model.predict(df)
     return {"prediction" : str(int(math.ceil(yhat)))}
