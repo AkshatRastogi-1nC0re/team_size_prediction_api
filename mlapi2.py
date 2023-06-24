@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import pickle
 import pandas as pd
+import math
 
 app = FastAPI()
 
@@ -23,4 +24,4 @@ with open('best_model_team_rf.pkl', 'rb') as file:
 async def scoring_endpoint(item: ScoringItem):
     df = pd.DataFrame([item.dict().values()], columns=item.dict().keys())
     yhat = model.predict(df)
-    return {"prediction" : str(yhat)}
+    return {"prediction" : str(int(math.ceil(yhat)))}
